@@ -1,0 +1,39 @@
+services:
+  next-app:
+    container_name: next-app
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app
+      - ./public/:/app/public
+    restart: always
+    networks:
+      - my_network
+    depends_on:
+      db:
+        condition: service_started
+    ports:
+      - 3000:3000
+    # command: 
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: tester
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: test_db
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+volumes:
+  postgres_data:
+
+networks:
+  my_network:

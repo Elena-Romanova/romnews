@@ -1,5 +1,8 @@
+// Создаём клиент призмы для доступа к db
+
 import { PrismaClient } from '@prisma/client'
 
+// для того, чтобы создавался только один клиент
 const PrismaClientSingleton = () => {
     return new PrismaClient()
 }

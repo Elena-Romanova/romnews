@@ -1,3 +1,5 @@
+// Функции для взаимодйствия с базой данных
+
 "use server"
 import prisma from "@/app/lib/db";
 import { news } from "@prisma/client";
